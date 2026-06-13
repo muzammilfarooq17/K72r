@@ -1,52 +1,54 @@
-import { useGSAP } from "@gsap/react"
-import { gsap } from "gsap"
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
 import { useContext, useRef, useEffect } from "react";
 import { NavbarContext } from "../Context/NavContext";
+// 1. Link component ko import kiya navigation ke liye
+import { Link } from "react-router-dom";
 
 const FullScreenNav = () => {
-  const fullScreenRef = useRef(null)
-  const timelineRef = useRef(null)
-  const isMobile = useRef(false)
+  const fullScreenRef = useRef(null);
+  const timelineRef = useRef(null);
+  const isMobile = useRef(false);
 
-  const { navOpen, setNavOpen } = useContext(NavbarContext)
+  const { navOpen, setNavOpen } = useContext(NavbarContext);
 
   useEffect(() => {
-    isMobile.current = window.innerWidth < 768
-  }, [])
+    isMobile.current = window.innerWidth < 768;
+  }, []);
 
   useGSAP(() => {
-    const tl = gsap.timeline({ paused: true })
+    const tl = gsap.timeline({ paused: true });
 
     tl.to(fullScreenRef.current, {
       display: 'block',
       duration: 0
-    })
+    });
     tl.to('.stairing', {
       height: '100%',
       stagger: { amount: 0.3 },
       duration: 0.4
-    })
+    });
     tl.to('.navlink', {
       opacity: 1,
       rotateX: 0,
       stagger: { amount: 0.3 },
       duration: 0.4
-    }, "-=0.2")
+    }, "-=0.2");
 
-    timelineRef.current = tl
-  }, { scope: fullScreenRef })
+    timelineRef.current = tl;
+  }, { scope: fullScreenRef });
 
   useGSAP(() => {
     if (navOpen) {
-      timelineRef.current?.play()
+      timelineRef.current?.play();
     } else {
-      timelineRef.current?.reverse()
+      timelineRef.current?.reverse();
     }
-  }, [navOpen])
+  }, [navOpen]);
 
   useGSAP(() => {
-    const mobile = window.innerWidth < 768
-    if (mobile) return
+    const mobile = window.innerWidth < 768;
+    if (mobile) return;
 
     const links = gsap.utils.toArray('.link');
     links.forEach((link) => {
@@ -84,7 +86,6 @@ const FullScreenNav = () => {
       className="fullscreen h-screen w-screen overflow-hidden z-50 absolute"
       style={{ display: 'none' }}
     >
-      {/* Staircase Transition Background */}
       <div className="h-screen w-full fixed top-0 left-0 pointer-events-none">
         <div className="h-screen w-full flex">
           <div className="stairing h-0 w-1/5 bg-black"></div>
@@ -95,10 +96,8 @@ const FullScreenNav = () => {
         </div>
       </div>
 
-      {/* Main Content Area */}
       <div className="relative navlink opacity-0 w-full h-full flex flex-col justify-between p-6 md:p-12" style={{ transform: "rotateX(90deg)" }}>
         
-        {/* Header: Logo & Close Button */}
         <div className="flex w-full justify-between items-center">
           <div>
             <svg
@@ -127,11 +126,9 @@ const FullScreenNav = () => {
           </div>
         </div>
 
-        {/* Links Section */}
         <div id="all-links" className="flex-1 flex flex-col justify-center my-8 space-y-4 md:space-y-6">
 
-          {/* WORK LINK */}
-          <a href="/Work" className="link border-y border-gray-700 relative block cursor-pointer overflow-hidden py-3 md:py-6">
+          <Link to="/work" onClick={() => setNavOpen(false)} className="link border-y border-gray-700 relative block cursor-pointer overflow-hidden py-3 md:py-6">
             <h1 className="text-white font-sans font-medium text-center text-[3.5rem] sm:text-[5rem] md:text-[7rem] lg:text-[9rem] tracking-tight leading-[0.8] uppercase m-0">
               Work
             </h1>
@@ -157,10 +154,9 @@ const FullScreenNav = () => {
                 <div className="h-10 md:h-14 w-24 md:w-36 border-2 border-black rounded-full shrink-0 mx-2 self-center"></div>
               </div>
             </div>
-          </a>
+          </Link>
 
-          {/* AGENCY LINK */}
-          <a href="/Agency" className="link border-b border-gray-700 relative block cursor-pointer overflow-hidden py-3 md:py-6">
+          <Link to="/agency" onClick={() => setNavOpen(false)} className="link border-b border-gray-700 relative block cursor-pointer overflow-hidden py-3 md:py-6">
             <h1 className="text-white font-sans font-medium text-center text-[3.5rem] sm:text-[5rem] md:text-[7rem] lg:text-[9rem] tracking-tight leading-[0.8] uppercase m-0">
               Agency
             </h1>
@@ -186,10 +182,9 @@ const FullScreenNav = () => {
                 <div className="h-10 md:h-14 w-24 md:w-36 border-2 border-black rounded-full shrink-0 mx-2 self-center"></div>
               </div>
             </div>
-          </a>
+          </Link>
 
-          {/* CONTACTS LINK */}
-          <a href="/Contacts" className="link border-b border-gray-700 relative block cursor-pointer overflow-hidden py-3 md:py-6">
+          <Link to="/contacts" onClick={() => setNavOpen(false)} className="link border-b border-gray-700 relative block cursor-pointer overflow-hidden py-3 md:py-6">
             <h1 className="text-white font-sans font-medium text-center text-[3.5rem] sm:text-[5rem] md:text-[7rem] lg:text-[9rem] tracking-tight leading-[0.8] uppercase m-0">
               Contacts
             </h1>
@@ -223,11 +218,10 @@ const FullScreenNav = () => {
                 </svg>
               </div>
             </div>
-          </a>
+          </Link>
 
         </div>
 
-        {/* Dummy footer space */}
         <div className="w-full h-2 hidden md:block"></div>
       </div>
     </div>
