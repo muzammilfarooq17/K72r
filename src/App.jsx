@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
-import Home from "./Pages/Home"
-import Agency from "./Pages/Agency"
-import Work from "./Pages/Work"
+import Home from "./Pages/Home.jsx"
+import Agency from "./Pages/Agency.jsx"
+import Work from "./Pages/Work.jsx"
 import Navbar from './Components/Navigation/Navbar.jsx'
 import FullScreenNav from "./Components/Navigation/FullScreenNav.jsx"
 import Contacts from "./Pages/Contacts.jsx"

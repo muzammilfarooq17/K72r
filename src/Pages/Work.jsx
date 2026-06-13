@@ -9,22 +9,22 @@ const Work = () => {
   const containerRef = useRef(null)
 
   const projects = [
-    { id: 1, src: "public/WorkImages/Work--1.png", title: "Core System v1", category: "Engine Framework", year: "2026" },
-    { id: 2, src: "public/WorkImages/Work--2.jpg", title: "Hyperion Interface", category: "Spatial UI", year: "2026" },
-    { id: 3, src: "public/WorkImages/Work--3.jpg", title: "Neural Pipeline", category: "Data Architecture", year: "2025" },
-    { id: 4, src: "public/WorkImages/Work--4.jpg", title: "Vector Vault", category: "Digital Asset Hub", year: "2025" },
-    { id: 5, src: "public/WorkImages/Work--5.jpg", title: "Synthetic Sync", category: "Automation Core", year: "2025" },
-    { id: 6, src: "public/WorkImages/Work--6.jpg", title: "Apex Module", category: "Hardware Matrix", year: "2025" },
-    { id: 7, src: "public/WorkImages/Work--7.jpg", title: "Spectra Node", category: "Web3 Network", year: "2025" },
-    { id: 8, src: "public/WorkImages/Work--8.jpg", title: "Nexus Shield", category: "Cyber Infrastruct", year: "2025" },
-    { id: 9, src: "public/WorkImages/Work--9.jpg", title: "Omni Render", category: "Graphics Core", year: "2024" },
-    { id: 10, src: "public/WorkImages/Work--10.jpg", title: "Pulse Engine", category: "Dynamic Content", year: "2024" },
-    { id: 11, src: "public/WorkImages/Work--11.jpg", title: "Chronos Ledger", category: "Cryptography", year: "2024" },
-    { id: 12, src: "public/WorkImages/Work--12.jpg", title: "Void Space", category: "Minimalist Studio", year: "2024" },
-    { id: 13, src: "public/WorkImages/Work--13.jpg", title: "Quantum Deck", category: "Terminal OS", year: "2024" },
-    { id: 14, src: "public/WorkImages/Work--14.jpg", title: "Matrix Portal", category: "Interactive Gateway", year: "2024" },
-    { id: 15, src: "public/WorkImages/Work--15.avif", title: "Helios Grid", category: "Energy Topology", year: "2024" },
-    { id: 16, src: "public/WorkImages/Work--16.jpg", title: "K72 Core Alpha", category: "Genesis Launch", year: "2024" },
+    { id: 1, src: "/WorkImages/Work--1.png", title: "Core System v1", category: "Engine Framework", year: "2026" },
+    { id: 2, src: "/WorkImages/Work--2.jpg", title: "Hyperion Interface", category: "Spatial UI", year: "2026" },
+    { id: 3, src: "/WorkImages/Work--3.jpg", title: "Neural Pipeline", category: "Data Architecture", year: "2025" },
+    { id: 4, src: "/WorkImages/Work--4.jpg", title: "Vector Vault", category: "Digital Asset Hub", year: "2025" },
+    { id: 5, src: "/WorkImages/Work--5.jpg", title: "Synthetic Sync", category: "Automation Core", year: "2025" },
+    { id: 6, src: "/WorkImages/Work--6.jpg", title: "Apex Module", category: "Hardware Matrix", year: "2025" },
+    { id: 7, src: "/WorkImages/Work--7.jpg", title: "Spectra Node", category: "Web3 Network", year: "2025" },
+    { id: 8, src: "/WorkImages/Work--8.jpg", title: "Nexus Shield", category: "Cyber Infrastruct", year: "2025" },
+    { id: 9, src: "/WorkImages/Work--9.jpg", title: "Omni Render", category: "Graphics Core", year: "2024" },
+    { id: 10, src: " /WorkImages/Work--10.jpg", title: "Pulse Engine", category: "Dynamic Content", year: "2024" },
+    { id: 11, src: " /WorkImages/Work--11.jpg", title: "Chronos Ledger", category: "Cryptography", year: "2024" },
+    { id: 12, src: " /WorkImages/Work--12.jpg", title: "Void Space", category: "Minimalist Studio", year: "2024" },
+    { id: 13, src: " /WorkImages/Work--13.jpg", title: "Quantum Deck", category: "Terminal OS", year: "2024" },
+    { id: 14, src: " /WorkImages/Work--14.jpg", title: "Matrix Portal", category: "Interactive Gateway", year: "2024" },
+    { id: 15, src: " /WorkImages/Work--15.avif", title: "Helios Grid", category: "Energy Topology", year: "2024" },
+    { id: 16, src: " /WorkImages/Work--16.jpg", title: "K72 Core Alpha", category: "Genesis Launch", year: "2024" },
   ]
 
   useGSAP(() => {

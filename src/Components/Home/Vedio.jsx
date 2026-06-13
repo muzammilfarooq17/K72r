@@ -1,3 +1,4 @@
+
 const Vedio = () => {
   return (
     <video
@@ -8,8 +9,9 @@ const Vedio = () => {
       playsInline
       preload="auto"
     >
+      {/* Purana relative path hatakar direct absolute public root path '/' lagaya */}
       <source
-        src="../../../public/69496b2d.mp4"
+        src="/69496b2d.mp4"
         type="video/mp4"
       />
     </video>

@@ -1,3 +1,4 @@
+import { Mail, Phone, ShieldAlert } from "lucide-react"
 import { useGSAP } from "@gsap/react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/all"
@@ -13,13 +14,13 @@ const Contacts = () => {
   gsap.registerPlugin(ScrollTrigger)
 
   useGSAP(() => {
-    ScrollTrigger.refresh()
-
+    // 1. Hero Text Character Animation
     gsap.fromTo('.hero-char',
       { y: 140, rotateX: -70, opacity: 0 },
       { y: 0, rotateX: 0, opacity: 1, duration: 1.2, stagger: 0.08, ease: "power4.out" }
     )
 
+    // 2. Continuous Infinite Marquee Animation
     gsap.to(marqueeRef.current, {
       xPercent: -50,
       repeat: -1,
@@ -27,23 +28,32 @@ const Contacts = () => {
       ease: "linear"
     })
 
+    // 3. Info Cards ScrollTrigger Animation (Fixed Flash on Refresh)
     const cards = gsap.utils.toArray('.info-card')
     if (cards.length > 0) {
-      gsap.from(cards, {
-        scrollTrigger: {
-          trigger: infoSectionRef.current,
-          start: "top 85%",
-          end: "bottom center",
-          toggleActions: "play none none reverse",
+      gsap.fromTo(cards, 
+        {
+          y: 60,
+          opacity: 0
         },
-        y: 60,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out"
-      })
+        {
+          scrollTrigger: {
+            trigger: infoSectionRef.current,
+            start: "top 85%",
+            end: "bottom center",
+            toggleActions: "play none none reverse",
+            invalidateOnRefresh: true
+          },
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out"
+        }
+      )
     }
 
+    // 4. Form Input Underline Interactions
     const inputs = containerRef.current.querySelectorAll('.form-input')
     const focusHandlers = []
     const blurHandlers = []
@@ -64,6 +74,8 @@ const Contacts = () => {
       focusHandlers[index] = onFocus
       blurHandlers[index] = onBlur
     })
+
+    ScrollTrigger.refresh()
 
     return () => {
       inputs.forEach((input, index) => {
@@ -181,33 +193,78 @@ const Contacts = () => {
 
       <section ref={infoSectionRef} className="w-full py-20 md:py-32 px-4 md:px-16 bg-black flex flex-col items-center justify-center">
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl w-full mx-auto">
+       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl w-full mx-auto">
 
-          <div className="info-card bg-[#0c0c0c] border border-white/5 rounded-3xl p-6 md:p-8 flex flex-col justify-center items-center text-center h-[220px] md:h-[260px] group transition-all duration-300 hover:border-white/20">
-            <span className="text-xs font-mono text-gray-500 tracking-wider block mb-3">01 / EMAIL TRANSMISSION</span>
-            <h3 className="text-lg md:text-xl font-medium tracking-tight group-hover:text-[#d2f54c] transition-colors duration-300 mb-4">Direct Message</h3>
-            <a href="mailto:farooqmuzamil.127@gmail.com" className="text-sm md:text-base font-light text-gray-300 hover:underline break-all px-2">
-              farooqmuzamil.127@gmail.com
-            </a>
-          </div>
+  {/* Card 01 - Email */}
+  <div className="info-card opacity-0 translate-y-[60px] bg-gradient-to-b from-[#111] to-[#070707] border border-white/5 rounded-3xl p-8 flex flex-col justify-between items-start h-[280px] group transition-all duration-500 hover:border-[#d2f54c]/30 hover:shadow-[0_0_30px_rgba(210,245,76,0.05)] relative overflow-hidden">
+    <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-[#d2f54c]/5 rounded-full blur-[60px] pointer-events-none group-hover:bg-[#d2f54c]/10 transition-all duration-500"></div>
+    
+    <div className="w-full flex justify-between items-center z-10">
+      <span className="text-xs font-mono text-gray-500 tracking-wider">01 / EMAIL SYSTEM</span>
+      <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 group-hover:text-[#d2f54c] group-hover:bg-[#d2f54c]/10 group-hover:border-[#d2f54c]/20 transition-all duration-500 group-hover:rotate-[6deg]">
+        <Mail className="w-5 h-5" />
+      </div>
+    </div>
 
-          <div className="info-card bg-[#0c0c0c] border border-white/5 rounded-3xl p-6 md:p-8 flex flex-col justify-center items-center text-center h-[220px] md:h-[260px] group transition-all duration-300 hover:border-white/20">
-            <span className="text-xs font-mono text-gray-500 tracking-wider block mb-3">02 / COMMUNICATIONS</span>
-            <h3 className="text-lg md:text-xl font-medium tracking-tight group-hover:text-[#d2f54c] transition-colors duration-300 mb-4">Primary Channel</h3>
-            <a href="tel:+923130007962" className="text-xl md:text-2xl font-light tracking-wide text-gray-300 hover:text-[#d2f54c] transition-colors duration-200">
-              +92 313 0007962
-            </a>
-          </div>
+    <div className="w-full z-10 mt-auto">
+      <h3 className="text-xl font-semibold tracking-tight text-white/90 mb-2 group-hover:text-[#d2f54c] transition-colors duration-300">
+        Direct Transmission
+      </h3>
+      <p className="text-xs text-gray-500 mb-4 font-light">Secure end-to-end node communication channels.</p>
+      <a href="mailto:farooqmuzamil.127@gmail.com" className="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200 break-all flex items-center gap-1 group/link">
+        farooqmuzamil.127@gmail.com
+        <span className="inline-block transform translate-x-0 group-hover/link:translate-x-1 transition-transform duration-200 text-[#d2f54c]">&rarr;</span>
+      </a>
+    </div>
+  </div>
 
-          <div className="info-card bg-[#0c0c0c] border border-white/5 rounded-3xl p-6 md:p-8 flex flex-col justify-center items-center text-center h-[220px] md:h-[260px] group transition-all duration-300 hover:border-white/20 sm:col-span-2 lg:col-span-1">
-            <span className="text-xs font-mono text-gray-500 tracking-wider block mb-3">03 / COMMUNICATIONS</span>
-            <h3 className="text-lg md:text-xl font-medium tracking-tight group-hover:text-[#d2f54c] transition-colors duration-300 mb-4">Secondary Line</h3>
-            <a href="tel:+92249288600" className="text-xl md:text-2xl font-light tracking-wide text-gray-300 hover:text-[#d2f54c] transition-colors duration-200">
-              +92 249288600
-            </a>
-          </div>
+  {/* Card 02 - Primary Phone */}
+  <div className="info-card opacity-0 translate-y-[60px] bg-gradient-to-b from-[#111] to-[#070707] border border-white/5 rounded-3xl p-8 flex flex-col justify-between items-start h-[280px] group transition-all duration-500 hover:border-[#d2f54c]/30 hover:shadow-[0_0_30px_rgba(210,245,76,0.05)] relative overflow-hidden">
+    <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-[#d2f54c]/5 rounded-full blur-[60px] pointer-events-none group-hover:bg-[#d2f54c]/10 transition-all duration-500"></div>
+    
+    <div className="w-full flex justify-between items-center z-10">
+      <span className="text-xs font-mono text-gray-500 tracking-wider">02 / PRIMARY VOICE</span>
+      <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 group-hover:text-[#d2f54c] group-hover:bg-[#d2f54c]/10 group-hover:border-[#d2f54c]/20 transition-all duration-500 group-hover:rotate-[6deg]">
+        <Phone className="w-5 h-5" />
+      </div>
+    </div>
 
-        </div>
+    <div className="w-full z-10 mt-auto">
+      <h3 className="text-xl font-semibold tracking-tight text-white/90 mb-2 group-hover:text-[#d2f54c] transition-colors duration-300">
+        Main Core Line
+      </h3>
+      <p className="text-xs text-gray-500 mb-4 font-light">Available for urgent technical syncs and architecture calls.</p>
+      <a href="tel:+923130007962" className="text-lg font-bold tracking-wide text-gray-300 hover:text-white transition-colors duration-200 flex items-center gap-2 group/link">
+        +92 313 0007962
+        <span className="inline-block transform translate-x-0 group-hover/link:translate-x-1 transition-transform duration-200 text-[#d2f54c]">&rarr;</span>
+      </a>
+    </div>
+  </div>
+
+  {/* Card 03 - Secondary Phone */}
+  <div className="info-card opacity-0 translate-y-[60px] bg-gradient-to-b from-[#111] to-[#070707] border border-white/5 rounded-3xl p-8 flex flex-col justify-between items-start h-[280px] group transition-all duration-500 hover:border-[#d2f54c]/30 hover:shadow-[0_0_30px_rgba(210,245,76,0.05)] relative overflow-hidden sm:col-span-2 lg:col-span-1">
+    <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-[#d2f54c]/5 rounded-full blur-[60px] pointer-events-none group-hover:bg-[#d2f54c]/10 transition-all duration-500"></div>
+    
+    <div className="w-full flex justify-between items-center z-10">
+      <span className="text-xs font-mono text-gray-500 tracking-wider">03 / BACKUP UPLINK</span>
+      <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 group-hover:text-[#d2f54c] group-hover:bg-[#d2f54c]/10 group-hover:border-[#d2f54c]/20 transition-all duration-500 group-hover:rotate-[6deg]">
+        <ShieldAlert className="w-5 h-5" />
+      </div>
+    </div>
+
+    <div className="w-full z-10 mt-auto">
+      <h3 className="text-xl font-semibold tracking-tight text-white/90 mb-2 group-hover:text-[#d2f54c] transition-colors duration-300">
+        Secondary Routing
+      </h3>
+      <p className="text-xs text-gray-500 mb-4 font-light">Alternative fail-safe network routing layer connection.</p>
+      <a href="tel:+92249288600" className="text-lg font-bold tracking-wide text-gray-300 hover:text-white transition-colors duration-200 flex items-center gap-2 group/link">
+        +92 249288600
+        <span className="inline-block transform translate-x-0 group-hover/link:translate-x-1 transition-transform duration-200 text-[#d2f54c]">&rarr;</span>
+      </a>
+    </div>
+  </div>
+
+</div>
 
         <div className="max-w-6xl w-full mx-auto mt-16 md:mt-24 border-t border-white/10 pt-8 md:pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-sm font-mono text-gray-500">Open-Source Engine Access Framework</p>
@@ -236,3 +293,4 @@ const Contacts = () => {
 }
 
 export default Contacts
+

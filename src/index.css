@@ -1,4 +1,4 @@
-@import "tailwindcss";@import "tailwindcss";
+/* @import "tailwindcss";@import "tailwindcss";
 
 @font-face {
   font-family: font1;
@@ -32,8 +32,63 @@
   pointer-events: auto;
 }
 
-/* Prevent horizontal scroll on mobile globally */
+
 html, body {
   overflow-x: hidden;
   max-width: 100vw;
+} */
+ @import "tailwindcss";
+ @import "tailwindcss";
+
+@font-face {
+  font-family: font1;
+  /* public/ hatakar direct forward slash lagaya */
+  src: url(/fonts/Lausanne-300.woff2);
 }
+@font-face {
+  font-family: font1;
+  src: url(/fonts/Lausanne-500.woff2);
+}
+
+.moveX {
+  animation-name: moveAnimation;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes moveAnimation {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+.movelink {
+  opacity: 0;
+  pointer-events: none;
+  transition: all ease 0.3s;
+}
+
+.nav-row-link:hover .movelink {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Global Reset & Layout Config */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: #000; /* Original black color for loop video backdrop */
+} 
+
+/* Force check layouts */
+/* body, html, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #111; /* temporarily black/dark set karein taake white text dikhe */
+  /* color: white;
+} */
